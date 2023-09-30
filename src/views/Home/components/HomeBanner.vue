@@ -6,7 +6,6 @@ const bannerList = ref([])
 const getBanner = async() =>{
    const res = await getBannerAPI()
    bannerList.value = res.result
-//    console.log(res);
 }
 
 onMounted(() =>{
@@ -14,8 +13,6 @@ onMounted(() =>{
 })
 
 </script>
-
-
 
 <template>
   <div class="home-banner">
@@ -26,8 +23,6 @@ onMounted(() =>{
     </el-carousel>
   </div>
 </template>
-
-
 
 <style scoped lang='scss'>
 .home-banner {
