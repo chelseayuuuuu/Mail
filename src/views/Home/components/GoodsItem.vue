@@ -3,7 +3,7 @@ defineProps({
   good: {
     type: Object,
     default: () =>{
-
+      
     }
   },
 });
