@@ -4,11 +4,12 @@ import { useRoute } from "vue-router";
 import { onMounted, ref } from "vue";
 import { getBannerAPI } from "@/apis/home";
 import GoodsItem from '@/views/Home/components/GoodsItem.vue'
+import { onBeforeRouteUpdate } from 'vue-router'
 
 const categoryData = ref({});
 const route = useRoute();
-const getCategory = async () => {
-  const res = await getCategoryAPI(route.params.id);
+const getCategory = async (id = route.params.id) => {
+  const res = await getCategoryAPI(id);
   categoryData.value = res.result;
 };
 
@@ -24,6 +25,10 @@ onMounted(() => {
   getCategory();
   getBanner();
 });
+
+onBeforeRouteUpdate((to) =>{
+    getCategory(to.params.id)
+})
 </script>
 
 <template>
