@@ -1,8 +1,8 @@
 <script setup>
-import { getCategoryFilterAPI, getSubCategoryAPI } from "@/apis/category";
-import { onMounted, ref } from "vue";
-import { useRoute } from "vue-router";
-import GoodsItem from "@/views/Home/components/GoodsItem.vue";
+import { getCategoryFilterAPI, getSubCategoryAPI } from '@/apis/category';
+import { onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
+import GoodsItem from '@/views/Home/components/GoodsItem.vue';
 
 const route = useRoute();
 const categoryData = ref({});
@@ -20,7 +20,7 @@ const reqData = ref({
   categoryId: route.params.id,
   page: 1,
   pageSize: 20,
-  sortField: "publishTime",
+  sortField: 'publishTime',
 });
 const getGoodList = async () => {
   const res = await getSubCategoryAPI(reqData.value);
@@ -34,17 +34,17 @@ const tabChange = () => {
   getGoodList();
 };
 
-const disabled = ref(false)
-const load = async () =>{
+const disabled = ref(false);
+const load = async () => {
   // console.log('加载更多');
-  reqData.value.page++
+  reqData.value.page++;
   const res = await getSubCategoryAPI(reqData.value);
-  goodList.value = [...goodList.value, ...res.result.items]
+  goodList.value = [...goodList.value, ...res.result.items];
   // 加载完毕 停止监听
-  if(res.result.items.length === 0){
-    disabled.value = true
+  if (res.result.items.length === 0) {
+    disabled.value = true;
   }
-}
+};
 </script>
 
 <template>
@@ -65,15 +65,17 @@ const load = async () =>{
         <el-tab-pane label="最高人气" name="orderNum"></el-tab-pane>
         <el-tab-pane label="评论最多" name="evaluateNum"></el-tab-pane>
       </el-tabs>
-      <div class="body" v-infinite-scroll="load" :infinite-scroll-disabled="disabled">
+      <div
+        class="body"
+        v-infinite-scroll="load"
+        :infinite-scroll-disabled="disabled"
+      >
         <!-- 商品列表-->
         <goods-item v-for="good in goodList" :good="good" :key="good.id" />
       </div>
     </div>
   </div>
 </template>
-
-
 
 <style lang="scss" scoped>
 .bread-container {
