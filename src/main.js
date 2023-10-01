@@ -1,20 +1,23 @@
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
+import { createApp } from 'vue';
+import { createPinia } from 'pinia';
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 // 全局指令注册
-import { lazyPlugin } from '@/directives'
-import { componentPlugin } from '@/components/index'
+import { lazyPlugin } from '@/directives';
+import { componentPlugin } from '@/components/index';
 
-import App from './App.vue'
-import router from './router'
+import App from './App.vue';
+import router from './router';
 
-import '@/styles/common.scss'
+import '@/styles/common.scss';
 
-const app = createApp(App)
+const app = createApp(App);
 
-app.use(createPinia())
-app.use(router)
-app.use(lazyPlugin)
-app.use(componentPlugin)
+const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate);
 
-app.mount('#app')
+app.use(pinia);
+app.use(router);
+app.use(lazyPlugin);
+app.use(componentPlugin);
 
+app.mount('#app');
