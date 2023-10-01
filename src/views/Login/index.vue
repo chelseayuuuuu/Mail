@@ -1,5 +1,33 @@
 <script setup>
+import { ref } from "vue";
 
+const form = ref({
+  account: "",
+  password: "",
+});
+
+const rules = {
+  account: [
+    {
+      required: true,
+      message: "用户名不能为空",
+      trigger: "blur",
+    },
+  ],
+  password: [
+    {
+      required: true,
+      message: "密码不能为空",
+      trigger: "blur",
+    },
+    {
+      max: 14,
+      min: 6,
+      message: "密码长度为6-14个字符",
+      trigger: "blur",
+    },
+  ],
+};
 </script>
 
 
@@ -24,16 +52,21 @@
         </nav>
         <div class="account-box">
           <div class="form">
-            <el-form label-position="right" label-width="60px"
-              status-icon>
-              <el-form-item  label="账户">
-                <el-input/>
+            <el-form
+              :model="form"
+              :rules="rules"
+              label-position="right"
+              label-width="60px"
+              status-icon
+            >
+              <el-form-item prop="account" label="账户">
+                <el-input v-model="form.account" />
               </el-form-item>
-              <el-form-item label="密码">
-                <el-input/>
+              <el-form-item prop="password" label="密码">
+                <el-input v-model="form.password" />
               </el-form-item>
               <el-form-item label-width="22px">
-                <el-checkbox  size="large">
+                <el-checkbox size="large">
                   我已同意隐私条款和服务条款
                 </el-checkbox>
               </el-form-item>
@@ -80,7 +113,8 @@
       height: 132px;
       width: 100%;
       text-indent: -9999px;
-      background: url("@/assets/images/logo.png") no-repeat center 18px / contain;
+      background: url("@/assets/images/logo.png") no-repeat center 18px /
+        contain;
     }
   }
 
@@ -107,7 +141,7 @@
 }
 
 .login-section {
-  background: url('@/assets/images/login-bg.png') no-repeat center / cover;
+  background: url("@/assets/images/login-bg.png") no-repeat center / cover;
   height: 488px;
   position: relative;
 
@@ -157,7 +191,7 @@
       color: #999;
       display: inline-block;
 
-      ~a {
+      ~ a {
         border-left: 1px solid #ccc;
       }
     }
@@ -188,7 +222,7 @@
         position: relative;
         height: 36px;
 
-        >i {
+        > i {
           width: 34px;
           height: 34px;
           background: #cfcdcd;
@@ -233,7 +267,7 @@
         }
       }
 
-      >.error {
+      > .error {
         position: absolute;
         font-size: 12px;
         line-height: 28px;
