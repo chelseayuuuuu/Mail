@@ -25,6 +25,12 @@ export const useCartStore = defineStore(
       cartList.value.splice(idx, 1);
     };
 
+    //单选
+    const singleCheck = (skuId, selected) => {
+      const item = cartList.value.find((item) => (item.skuId = skuId));
+      item.selected = selected;
+    };
+
     //计算属性 总数 总价
     const allCount = computed(() => {
       return cartList.value.reduce((a, c) => a + c.count, 0);
@@ -37,6 +43,7 @@ export const useCartStore = defineStore(
       cartList,
       addCart,
       delCart,
+      singleCheck,
       allCount,
       allPrice,
     };
