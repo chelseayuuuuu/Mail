@@ -10,9 +10,13 @@ export const useUserStore = defineStore(
       const res = await loginAPI({ account, password });
       userInfo.value = res.result;
     };
+    const clearUserInfo = () => {
+      userInfo.value = {};
+    };
     return {
       userInfo,
       getUserInfo,
+      clearUserInfo,
     };
   },
   {
