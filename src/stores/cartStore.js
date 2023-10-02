@@ -27,8 +27,16 @@ export const useCartStore = defineStore(
 
     //单选
     const singleCheck = (skuId, selected) => {
-      const item = cartList.value.find((item) => (item.skuId = skuId));
+      const item = cartList.value.find((item) => item.skuId === skuId);
       item.selected = selected;
+    };
+
+    //全选
+    const isAll = computed(() => {
+      return cartList.value.every((item) => item.selected);
+    });
+    const allCheck = (selected) => {
+      cartList.value.forEach((item) => (item.selected = selected));
     };
 
     //计算属性 总数 总价
@@ -46,6 +54,8 @@ export const useCartStore = defineStore(
       singleCheck,
       allCount,
       allPrice,
+      isAll,
+      allCheck,
     };
   },
   {
