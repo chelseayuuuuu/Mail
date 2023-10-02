@@ -5,6 +5,7 @@ export const useCartStore = defineStore(
   () => {
     const cartList = ref([]);
 
+    //添加
     const addCart = (goods) => {
       //已添加 - count + 1
       //未添加 - push
@@ -16,9 +17,17 @@ export const useCartStore = defineStore(
         cartList.value.push(goods);
       }
     };
+
+    //删除
+    //思路 splice和filter
+    const delCart = (skuId) => {
+      const idx = cartList.value.findIndex((item) => skuId === item.skuId);
+      cartList.value.splice(idx, 1);
+    };
     return {
       cartList,
       addCart,
+      delCart,
     };
   },
   {
